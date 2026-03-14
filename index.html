@@ -82,7 +82,7 @@
         
         body {
             font-family: var(--font-body), -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            background: var(--gb-cream);
+            background: var(--bg-white);
             height: 100vh;
             overflow: hidden;
             display: flex;
@@ -118,7 +118,6 @@
         .container {
             background: var(--bg-white);
             overflow: hidden;
-            max-width: 1440px;
             width: 100%;
             display: flex;
             height: 100vh;
@@ -164,6 +163,7 @@
         
         .info-section {
             flex: 1;
+            max-width: 720px;
             padding: 0 var(--space-2xl) var(--space-3xl) var(--space-2xl);
             overflow-y: auto;
             overflow-x: hidden;
@@ -174,17 +174,20 @@
         
         /* Custom Scrollbar */
         .info-section::-webkit-scrollbar {
-            width: 8px;
+            width: 6px;
         }
         
         .info-section::-webkit-scrollbar-track {
-            background: var(--bg-light);
-            border-radius: 10px;
+            background: transparent;
         }
         
         .info-section::-webkit-scrollbar-thumb {
-            background: #cbd5e1;
+            background: transparent;
             border-radius: 10px;
+        }
+        
+        .info-section:hover::-webkit-scrollbar-thumb {
+            background: #cbd5e1;
         }
         
         .info-section::-webkit-scrollbar-thumb:hover {
@@ -528,10 +531,6 @@
         
         /* Responsive Design with Better Breakpoints */
         @media (max-width: 1280px) {
-            .container {
-                max-width: 100%;
-            }
-            
             h1 {
                 font-size: var(--text-3xl);
             }
@@ -555,6 +554,7 @@
                 padding: var(--space-lg) var(--space-xl) var(--space-2xl);
                 height: auto;
                 max-height: none;
+                max-width: none;
                 overflow-y: visible;
             }
             
