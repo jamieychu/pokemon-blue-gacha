@@ -344,17 +344,17 @@
             font-weight: 500;
         }
         
-        @media (max-width: 768px) {
+        @media (max-width: 1024px) {
             .prototype-section {
                 display: none;
             }
         }
 
-        @media (min-width: 769px) {
+        @media (min-width: 1025px) {
             .mobile-proto-preview { display: none; }
         }
         
-        @media (min-width: 390px) and (max-width: 768px) {
+        @media (min-width: 390px) and (max-width: 599px) {
             .mobile-device-frame {
                 width: 230px;
                 height: 318px;
@@ -371,6 +371,16 @@
             }
             .mobile-device-frame iframe {
                 transform: scale(0.538);
+            }
+        }
+
+        @media (min-width: 769px) and (max-width: 1024px) {
+            .mobile-device-frame {
+                width: 340px;
+                height: 471px;
+            }
+            .mobile-device-frame iframe {
+                transform: scale(0.654);
             }
         }
         
@@ -557,31 +567,11 @@
                 min-height: 100vh;
             }
             
-            .prototype-section {
-                border-right: none;
-                border-bottom: 1px solid #e2e8f0;
-                min-height: 55vh;
-                max-height: 55vh;
-                padding: var(--space-md);
-            }
-            
-            .prototype-wrapper {
-                height: calc(55vh - 32px);
-                max-height: 780px;
-            }
-            
-            iframe {
-                width: 520px;
-                max-width: 100%;
-                height: calc(55vh - 32px);
-                max-height: 780px;
-            }
-            
             .info-section {
                 padding: var(--space-2xl) var(--space-xl);
-                height: 45vh;
-                max-height: 45vh;
-                overflow-y: auto;
+                height: auto;
+                max-height: none;
+                overflow-y: visible;
             }
             
             h1 {
@@ -607,30 +597,8 @@
                 min-height: calc(100vh - 16px);
             }
             
-            .prototype-section {
-                min-height: 50vh;
-                max-height: 50vh;
-                padding: var(--space-sm);
-            }
-            
-            .prototype-wrapper {
-                height: calc(50vh - 16px);
-                max-height: 540px;
-                overflow: hidden;
-            }
-            
-            iframe {
-                width: 390px;
-                max-width: 100%;
-                height: calc(50vh - 16px);
-                max-height: 540px;
-                min-height: 400px;
-                overflow: hidden;
-            }
-            
             .info-section {
                 padding: 0 var(--space-lg) var(--space-xl) var(--space-lg);
-                max-height: 50vh;
             }
             
             h1 {
