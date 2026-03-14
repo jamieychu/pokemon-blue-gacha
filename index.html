@@ -289,8 +289,7 @@
         }
         
         .mobile-device-frame {
-            width: 220px;
-            height: 305px;
+            width: 240px;
             border-radius: 12px;
             overflow: hidden;
             position: relative;
@@ -299,16 +298,10 @@
                 0 0 0 1px rgba(0,0,0,0.08);
         }
         
-        .mobile-device-frame iframe {
-            width: 520px;
-            height: 720px;
-            border: none;
-            position: absolute;
-            left: 50%;
-            top: 0;
-            transform: translateX(-50%) scale(0.423);
-            transform-origin: top center;
-            pointer-events: none;
+        .mobile-preview-img {
+            width: 100%;
+            height: auto;
+            display: block;
         }
         
         .mobile-tap-overlay {
@@ -359,31 +352,19 @@
         
         @media (min-width: 390px) and (max-width: 599px) {
             .mobile-device-frame {
-                width: 250px;
-                height: 346px;
-            }
-            .mobile-device-frame iframe {
-                transform: translateX(-50%) scale(0.481);
+                width: 270px;
             }
         }
         
         @media (min-width: 600px) and (max-width: 768px) {
             .mobile-device-frame {
-                width: 280px;
-                height: 388px;
-            }
-            .mobile-device-frame iframe {
-                transform: translateX(-50%) scale(0.538);
+                width: 320px;
             }
         }
 
         @media (min-width: 769px) and (max-width: 1024px) {
             .mobile-device-frame {
-                width: 340px;
-                height: 471px;
-            }
-            .mobile-device-frame iframe {
-                transform: translateX(-50%) scale(0.654);
+                width: 380px;
             }
         }
         
@@ -864,12 +845,11 @@
         <!-- Mobile-only: scaled preview with tap overlay (Crunchyroll pattern) -->
         <div class="mobile-proto-preview">
             <div class="mobile-device-frame">
-                <iframe 
-                    src="prototype/" 
-                    title="Pokémon Trainer Recruitment Preview"
-                    scrolling="no"
-                    aria-hidden="true">
-                </iframe>
+                <img 
+                    src="Pokemon_Gacha_Prototype_Preview.png" 
+                    alt="Pokémon Trainer Recruitment prototype showing Game Boy menu"
+                    class="mobile-preview-img"
+                >
                 <a href="prototype/" class="mobile-tap-overlay" id="mobile-proto-link" rel="noopener">
                     <span class="mobile-tap-btn">▶ Open Prototype</span>
                     <span class="mobile-tap-label">Tap to open fullscreen</span>
