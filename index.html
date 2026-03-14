@@ -3,10 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Pokemon Blue Trainer Recruitment - A new gacha feature prototype for collecting playable characters">
-    <title>Pokemon Blue: Gotta Recruit 'Em All! - Trainer Recruitment Prototype</title>
+    <meta name="description" content="Pokémon Blue Trainer Recruitment — a gacha collection system that extends endgame engagement while respecting the premium model. Portfolio project by Jamie Chu.">
+    <title>Pokémon Blue: Gotta Recruit 'Em All! — Trainer Recruitment</title>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Comic+Neue:wght@700&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=Space+Grotesk:wght@500;600;700&display=swap');
         
         :root {
             /* Spacing System - 8px baseline for consistency */
@@ -18,17 +18,15 @@
             --space-2xl: 48px;
             --space-3xl: 64px;
             
-            /* Color Palette with WCAG AA compliance */
-            --primary-purple: #5b4fcf;
-            --primary-purple-light: #667eea;
-            --primary-purple-dark: #4a3fb8;
-            --secondary-teal: #2dd4bf;
-            --secondary-pink: #ec4899;
-            --warning-yellow: #fbbf24;
-            --success-green: #10b981;
-            --danger-red: #ef4444;
+            /* Color Palette — Game Boy + Pokémon Blue Cartridge */
+            --gb-green: #9BBC0F;
+            --gb-green-dark: #5A7A0F;
+            --gb-green-muted: rgba(155, 188, 15, 0.15);
+            --pk-navy: #1E3A5F;
+            --gb-cream: #F5F1E8;
+            --gb-cream-light: #FAF8F3;
             
-            /* Text Colors - WCAG AA contrast ratios */
+            /* Text Colors */
             --text-primary: #1a1f36;
             --text-secondary: #475569;
             --text-tertiary: #64748b;
@@ -36,8 +34,12 @@
             
             /* Background Colors */
             --bg-white: #ffffff;
-            --bg-light: #f8fafc;
-            --bg-gray: #f1f5f9;
+            --bg-light: var(--gb-cream-light);
+            --bg-gray: var(--gb-cream);
+            
+            /* Font Families */
+            --font-display: 'Space Grotesk', sans-serif;
+            --font-body: 'DM Sans', sans-serif;
             
             /* Typography Scale */
             --text-xs: 0.75rem;
@@ -68,7 +70,7 @@
         
         /* Accessibility: Focus States */
         *:focus-visible {
-            outline: 3px solid var(--primary-purple);
+            outline: 3px solid var(--pk-navy);
             outline-offset: 2px;
             border-radius: 4px;
         }
@@ -79,14 +81,14 @@
         }
         
         body {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            font-family: var(--font-body), -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: var(--gb-cream);
             height: 100vh;
             overflow: hidden;
             display: flex;
             align-items: center;
             justify-content: center;
-            padding: var(--space-lg);
+            padding: 0;
             line-height: var(--leading-normal);
             color: var(--text-primary);
             font-size: var(--text-base);
@@ -99,7 +101,7 @@
             position: absolute;
             top: -40px;
             left: 0;
-            background: var(--primary-purple);
+            background: var(--pk-navy);
             color: var(--text-on-dark);
             padding: var(--space-sm) var(--space-md);
             text-decoration: none;
@@ -115,57 +117,27 @@
         
         .container {
             background: var(--bg-white);
-            border-radius: 24px;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
             overflow: hidden;
             max-width: 1440px;
             width: 100%;
             display: flex;
-            height: calc(100vh - 48px);
-            max-height: 900px;
+            height: 100vh;
             position: relative;
-            animation: slideUp 0.6s ease-out;
         }
         
-        @keyframes slideUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-        
-        /* Floating Pokemon decorations */
+        /* Floating Pokemon decorations - removed for visual maturity */
         .floating-pokemon {
-            position: absolute;
-            font-size: 2rem;
-            animation: float 6s ease-in-out infinite;
-            pointer-events: none;
-            opacity: 0.15;
-            z-index: 1;
+            display: none;
         }
-        
-        @keyframes float {
-            0%, 100% { transform: translateY(0px) rotate(0deg); }
-            25% { transform: translateY(-20px) rotate(5deg); }
-            75% { transform: translateY(10px) rotate(-5deg); }
-        }
-        
-        .pokemon-1 { top: 10%; right: 5%; animation-delay: 0s; }
-        .pokemon-2 { top: 70%; right: 8%; animation-delay: 2s; }
-        .pokemon-3 { top: 40%; right: 3%; animation-delay: 4s; }
         
         .prototype-section {
             flex: 1.2;
-            background: linear-gradient(180deg, var(--bg-light) 0%, var(--bg-gray) 100%);
+            background: var(--bg-light);
             display: flex;
             align-items: center;
             justify-content: center;
             padding: var(--space-lg);
-            border-right: 2px solid #e2e8f0;
+            border-right: 1px solid #e2e8f0;
             position: relative;
             overflow: hidden;
         }
@@ -188,9 +160,9 @@
             max-height: 720px;
             min-height: 720px;
             border: none;
-            border-radius: 16px;
-            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
-            background: linear-gradient(180deg, var(--bg-light) 0%, var(--bg-gray) 100%);
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            background: var(--bg-light);
             overflow: hidden;
             display: block;
         }
@@ -216,89 +188,18 @@
         }
         
         .info-section::-webkit-scrollbar-thumb {
-            background: var(--primary-purple-light);
+            background: #cbd5e1;
             border-radius: 10px;
         }
         
         .info-section::-webkit-scrollbar-thumb:hover {
-            background: var(--primary-purple);
-        }
-        
-        /* Desktop Notice - Mobile only fullscreen link */
-        .desktop-notice {
-            text-align: center;
-            padding-top: var(--space-md);
-            padding-bottom: 0;
-            margin-bottom: var(--space-xl);
-            display: block;
-        }
-        
-        .desktop-notice a {
-            display: inline-block;
-            color: #0f380f;
-            background: #e0d8a0;
-            padding: 8px 16px;
-            border-radius: 6px;
-            text-decoration: none;
-            font-weight: 600;
-            font-size: var(--text-xs);
-            letter-spacing: 0.5px;
-            transition: opacity 0.2s;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-        }
-        
-        .desktop-notice a:hover {
-            opacity: 0.85;
-        }
-        
-        /* Hide on desktop - only show on mobile/tablet */
-        @media (min-width: 769px) {
-            .desktop-notice {
-                display: none !important;
-            }
-        }
-        
-        .pokeball-icon {
-            display: inline-block;
-            width: 56px;
-            height: 56px;
-            margin-bottom: var(--space-lg);
-            background: linear-gradient(to bottom, #ee1515 0%, #ee1515 45%, #222224 45%, #222224 55%, #f0f0f0 55%, #f0f0f0 100%);
-            border-radius: 50%;
-            border: 3px solid #222224;
-            position: relative;
-            animation: bounce 2s ease-in-out infinite;
-            cursor: pointer;
-            transition: transform var(--transition-base);
-        }
-        
-        .pokeball-icon:hover {
-            transform: rotate(720deg) scale(1.1);
-            transition: transform 0.8s cubic-bezier(0.68, -0.55, 0.265, 1.55);
-        }
-        
-        @keyframes bounce {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-10px); }
-        }
-        
-        .pokeball-icon::after {
-            content: '';
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            width: 14px;
-            height: 14px;
-            background: white;
-            border: 3px solid #222224;
-            border-radius: 50%;
+            background: #94a3b8;
         }
         
         h1 {
-            font-family: 'Comic Neue', 'Inter', sans-serif;
+            font-family: var(--font-display);
             font-size: var(--text-4xl);
-            font-weight: 800;
+            font-weight: 700;
             color: var(--text-primary);
             margin-bottom: var(--space-xl);
             line-height: var(--leading-tight);
@@ -316,271 +217,180 @@
             }
         }
         
-        /* Header container for pokeball and title alignment */
-        .header-container {
-            display: flex;
-            align-items: center;
-            gap: var(--space-md);
-            margin-bottom: var(--space-xl);
-            flex-wrap: wrap;
-        }
-        
-        .header-container .pokeball-icon {
-            margin-bottom: 0;
-        }
-        
-        .header-container h1 {
-            margin-bottom: 0;
-            flex: 1;
-            min-width: 0;
-            position: relative;
-            display: inline-block;
-        }
-        
-        /* Alternative header style - stacked */
+        /* Header layout */
         .header-stacked {
-            padding-top: var(--space-lg);
+            padding-top: var(--space-2xl);
             margin-bottom: var(--space-xl);
-            text-align: center;
         }
         
         .header-stacked .title-line-1 {
-            display: flex;
+            display: inline-flex;
             align-items: center;
-            justify-content: center;
-            gap: var(--space-md);
-            font-size: var(--text-3xl);
-            color: var(--text-primary);
-            font-weight: 800;
-            margin-bottom: var(--space-sm);
-            font-family: 'Comic Neue', 'Inter', sans-serif;
+            gap: var(--space-sm);
+            font-size: 12px;
+            color: var(--gb-green-dark);
+            font-weight: 600;
+            margin-bottom: var(--space-md);
+            font-family: var(--font-body);
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
         }
         
-        .header-stacked .title-line-1 .pokeball-icon {
-            margin-bottom: 0;
-            width: 40px;
-            height: 40px;
+        .header-stacked .title-line-1 .label-pokeball {
+            width: 18px;
+            height: 18px;
+            background: linear-gradient(to bottom, #ee1515 0%, #ee1515 45%, #222224 45%, #222224 55%, #f0f0f0 55%, #f0f0f0 100%);
+            border-radius: 50%;
+            border: 2px solid #222224;
+            position: relative;
+            flex-shrink: 0;
+            cursor: pointer;
+            transition: transform var(--transition-base);
         }
         
-        .header-stacked .title-line-1 .pokeball-icon::after {
-            width: 10px;
-            height: 10px;
-            border-width: 2px;
+        .header-stacked .title-line-1 .label-pokeball::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 4px;
+            height: 4px;
+            background: white;
+            border: 1px solid #222224;
+            border-radius: 50%;
         }
         
         .header-stacked .tagline {
-            font-size: var(--text-2xl);
-            color: var(--primary-purple);
+            font-size: clamp(28px, 5vw, 40px);
+            color: var(--text-primary);
             font-weight: 700;
-            margin-bottom: 0;
-            font-family: 'Comic Neue', 'Inter', sans-serif;
-            display: inline-block;
-            position: relative;
+            margin-bottom: var(--space-sm);
+            font-family: var(--font-display);
+            line-height: var(--leading-tight);
+            letter-spacing: -0.02em;
         }
         
-        .header-stacked .tagline::after {
-            content: '';
-            position: absolute;
-            bottom: -8px;
-            left: 0;
-            width: 100%;
-            height: 4px;
-            background: linear-gradient(90deg, var(--secondary-pink), var(--primary-purple), var(--secondary-teal));
-            background-size: 200% 100%;
-            animation: gradientSlide 3s ease-in-out infinite;
-            border-radius: 2px;
+        .header-stacked .tagline-sub {
+            font-size: var(--text-lg);
+            color: var(--gb-green-dark);
+            font-weight: 600;
+            font-family: var(--font-display);
+            letter-spacing: -0.01em;
+            margin-bottom: var(--space-lg);
         }
         
         .header-stacked h1 {
             margin-bottom: 0;
         }
         
-        /* Animated underline */
-        h1::after {
-            content: '';
-            position: absolute;
-            bottom: -8px;
-            left: 0;
-            width: 100%;
-            height: 4px;
-            background: linear-gradient(90deg, var(--secondary-pink), var(--primary-purple), var(--secondary-teal));
-            background-size: 200% 100%;
-            animation: gradientSlide 3s ease-in-out infinite;
-            border-radius: 2px;
-        }
-        
-        @keyframes gradientSlide {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
-        }
-        
-        .tldr-box {
-            background: linear-gradient(135deg, rgba(91, 79, 207, 0.08) 0%, rgba(236, 72, 153, 0.08) 100%);
-            border: 2px solid var(--primary-purple-light);
-            border-left-width: 6px;
-            padding: var(--space-lg);
-            border-radius: 16px;
-            margin-bottom: var(--space-xl);
-            position: relative;
-            overflow: hidden;
-            transition: all var(--transition-base);
-        }
-        
-        .tldr-box:hover {
-            transform: translateX(4px);
-            box-shadow: 0 8px 24px rgba(91, 79, 207, 0.15);
-        }
-        
-        .tldr-box::before {
-            content: '✨';
-            position: absolute;
-            top: -20px;
-            right: -20px;
-            font-size: 60px;
-            opacity: 0.1;
-            transform: rotate(-15deg);
-        }
-        
-        .tldr-title {
-            font-size: var(--text-lg);
-            font-weight: 700;
-            color: var(--primary-purple);
-            margin-bottom: var(--space-sm);
+        /* Mobile prototype preview — Crunchyroll pattern */
+        .mobile-proto-preview {
             display: flex;
+            flex-direction: column;
             align-items: center;
-            gap: var(--space-sm);
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
+            padding: var(--space-lg) var(--space-md) var(--space-2xl);
+            background: linear-gradient(180deg, #d8dce4 0%, var(--gb-cream) 100%);
         }
         
-        .tldr-content {
-            color: var(--text-secondary);
-            font-size: var(--text-base);
-            line-height: var(--leading-relaxed);
-        }
-        
-        .feature-list {
-            list-style: none;
-            margin: var(--space-xl) 0;
-            padding: 0;
-        }
-        
-        .feature-list li {
-            margin-bottom: var(--space-lg);
-            padding: var(--space-md);
-            background: var(--bg-light);
+        .mobile-device-frame {
+            width: 200px;
+            height: 360px;
             border-radius: 12px;
-            display: flex;
-            align-items: flex-start;
-            gap: var(--space-md);
-            transition: all var(--transition-base);
-            position: relative;
             overflow: hidden;
-        }
-        
-        .feature-list li:hover {
-            background: linear-gradient(135deg, rgba(45, 212, 191, 0.05) 0%, rgba(91, 79, 207, 0.05) 100%);
-            transform: translateX(8px);
-            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
-        }
-        
-        .feature-list li::before {
-            content: '';
-            position: absolute;
-            left: 0;
-            top: 0;
-            bottom: 0;
-            width: 3px;
-            background: linear-gradient(180deg, var(--secondary-teal), var(--primary-purple));
-            opacity: 0;
-            transition: opacity var(--transition-fast);
-        }
-        
-        .feature-list li:hover::before {
-            opacity: 1;
-        }
-        
-        .feature-icon {
-            font-size: 1.5rem;
-            flex-shrink: 0;
-            animation: pulse 2s ease-in-out infinite;
-        }
-        
-        @keyframes pulse {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.1); }
-        }
-        
-        .feature-text {
-            flex: 1;
-            color: var(--text-secondary);
-            font-size: var(--text-base);
-            line-height: var(--leading-relaxed);
-        }
-        
-        .feature-text strong {
-            color: var(--text-primary);
-            font-weight: 600;
-        }
-        
-        .note-box {
-            background: linear-gradient(135deg, #fef3c7 0%, #fed7aa 100%);
-            border: 2px solid var(--warning-yellow);
-            border-radius: 16px;
-            padding: var(--space-lg);
-            margin: var(--space-xl) 0;
             position: relative;
-            animation: wiggle 5s ease-in-out infinite;
+            box-shadow:
+                0 12px 32px -6px rgba(0,0,0,0.25),
+                0 0 0 1px rgba(0,0,0,0.08);
         }
         
-        @keyframes wiggle {
-            0%, 100% { transform: rotate(-1deg); }
-            50% { transform: rotate(1deg); }
+        .mobile-device-frame iframe {
+            width: 520px;
+            height: 720px;
+            border: none;
+            transform: scale(0.385);
+            transform-origin: top left;
+            pointer-events: none;
         }
         
-        .note-title {
-            color: #92400e;
-            font-weight: 700;
-            font-size: var(--text-base);
-            margin-bottom: var(--space-sm);
+        .mobile-tap-overlay {
+            position: absolute;
+            inset: 0;
+            background: rgba(0,0,0,0.45);
+            backdrop-filter: blur(1px);
             display: flex;
+            flex-direction: column;
             align-items: center;
-            gap: var(--space-sm);
-            text-transform: uppercase;
-            letter-spacing: 0.03em;
+            justify-content: center;
+            gap: 8px;
+            text-decoration: none;
+            border-radius: 12px;
+            transition: background 0.2s;
+        }
+        .mobile-tap-overlay:hover { background: rgba(0,0,0,0.35); }
+        
+        .mobile-tap-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 20px;
+            background: var(--pk-navy);
+            color: white;
+            font-family: var(--font-display);
+            font-size: 13px;
+            font-weight: 600;
+            border-radius: 10px;
+            box-shadow: 0 4px 20px rgba(30, 58, 95, 0.3);
         }
         
-        .note-text {
-            color: #78350f;
-            font-size: var(--text-sm);
-            line-height: var(--leading-relaxed);
+        .mobile-tap-label {
+            font-size: 11px;
+            color: rgba(255,255,255,0.7);
+            font-weight: 500;
         }
         
+        @media (min-width: 769px) {
+            .mobile-proto-preview { display: none; }
+        }
+        
+        @media (min-width: 390px) and (max-width: 768px) {
+            .mobile-device-frame {
+                width: 230px;
+                height: 414px;
+            }
+            .mobile-device-frame iframe {
+                transform: scale(0.442);
+            }
+        }
+        
+        @media (min-width: 600px) and (max-width: 768px) {
+            .mobile-device-frame {
+                width: 280px;
+                height: 504px;
+            }
+            .mobile-device-frame iframe {
+                transform: scale(0.538);
+            }
+        }
+        
+        .content-divider {
+            height: 1px;
+            background: #e2e8f0;
+            margin: var(--space-lg) 0;
+        }
+
         .tools-section {
-            background: linear-gradient(135deg, var(--bg-light) 0%, rgba(139, 92, 246, 0.05) 100%);
-            border: 2px dashed rgba(139, 92, 246, 0.3);
-            border-radius: 16px;
-            padding: var(--space-lg);
-            margin: var(--space-xl) 0;
-            transition: all var(--transition-base);
-        }
-        
-        .tools-section:hover {
-            border-color: rgba(139, 92, 246, 0.6);
-            background: linear-gradient(135deg, var(--bg-light) 0%, rgba(139, 92, 246, 0.1) 100%);
+            margin: var(--space-sm) 0;
         }
         
         .tools-title {
-            font-weight: 700;
-            color: var(--text-primary);
-            font-size: var(--text-base);
+            font-family: var(--font-display);
+            font-weight: 600;
+            color: var(--gb-green-dark);
+            font-size: 11px;
             margin-bottom: var(--space-md);
-            display: flex;
-            align-items: center;
-            gap: var(--space-sm);
             text-transform: uppercase;
-            letter-spacing: 0.03em;
+            letter-spacing: 0.1em;
         }
         
         .tools-list {
@@ -591,12 +401,12 @@
         
         .tool-badge {
             background: var(--bg-white);
-            color: var(--primary-purple);
+            color: var(--text-secondary);
             padding: var(--space-xs) var(--space-md);
-            border-radius: 20px;
+            border-radius: 6px;
             font-size: var(--text-sm);
-            font-weight: 600;
-            border: 2px solid var(--primary-purple-light);
+            font-weight: 500;
+            border: 1px solid #e2e8f0;
             transition: all var(--transition-fast);
             text-decoration: none;
             display: inline-block;
@@ -604,54 +414,8 @@
         }
         
         .tool-badge:hover {
-            background: var(--primary-purple);
-            color: var(--text-on-dark);
-            transform: translateY(-2px);
-            box-shadow: 0 4px 8px rgba(91, 79, 207, 0.3);
-        }
-        
-        .tip-box {
-            background: linear-gradient(135deg, var(--secondary-teal) 0%, #14b8a6 100%);
-            color: var(--text-on-dark);
-            border-radius: 16px;
-            padding: var(--space-lg);
-            margin: var(--space-xl) 0;
-            box-shadow: 0 8px 24px rgba(45, 212, 191, 0.3);
-            position: relative;
-            overflow: hidden;
-            animation: shimmer 3s ease-in-out infinite;
-        }
-        
-        @keyframes shimmer {
-            0%, 100% { box-shadow: 0 8px 24px rgba(45, 212, 191, 0.3); }
-            50% { box-shadow: 0 8px 32px rgba(45, 212, 191, 0.5); }
-        }
-        
-        .tip-box::after {
-            content: '🎮';
-            position: absolute;
-            bottom: -20px;
-            right: -20px;
-            font-size: 80px;
-            opacity: 0.1;
-            transform: rotate(15deg);
-        }
-        
-        .tip-title {
-            font-weight: 700;
-            font-size: var(--text-base);
-            margin-bottom: var(--space-sm);
-            display: flex;
-            align-items: center;
-            gap: var(--space-sm);
-            text-transform: uppercase;
-            letter-spacing: 0.03em;
-        }
-        
-        .tip-content {
-            font-size: var(--text-base);
-            line-height: var(--leading-relaxed);
-            font-weight: 500;
+            border-color: var(--gb-green);
+            color: var(--gb-green-dark);
         }
         
         /* TL;DR Documentation Button */
@@ -660,8 +424,8 @@
         }
         
         .tldr-button-helper {
-            font-size: 13px;
-            color: #64748b;
+            font-size: 14px;
+            color: var(--text-tertiary);
             margin: 0 0 12px 0;
             text-align: left;
         }
@@ -669,16 +433,15 @@
         .tldr-doc-button {
             display: block;
             width: 100%;
-            background: var(--primary-purple);
+            background: var(--pk-navy);
             color: white;
-            padding: 14px 24px;
+            padding: 12px 24px;
             border-radius: 8px;
             text-decoration: none;
             font-weight: 600;
-            font-size: 14px;
+            font-size: var(--text-sm);
             text-align: center;
-            transition: opacity 0.2s, transform 0.2s;
-            box-shadow: 0 2px 8px rgba(91, 79, 207, 0.3);
+            transition: opacity 0.2s;
             border: none;
             cursor: pointer;
             line-height: 1.4;
@@ -687,13 +450,12 @@
         
         .tldr-doc-button:hover {
             opacity: 0.9;
-            transform: translateY(-1px);
         }
         
         /* Author Section Styles */
         .author-section {
-            margin-top: var(--space-3xl);
-            padding-top: var(--space-xl);
+            margin-top: var(--space-xl);
+            padding-top: var(--space-lg);
             text-align: center;
             position: relative;
         }
@@ -701,7 +463,7 @@
         .author-divider {
             width: 100px;
             height: 2px;
-            background: linear-gradient(90deg, transparent, var(--primary-purple-light), transparent);
+            background: linear-gradient(90deg, transparent, var(--gb-green), transparent);
             margin: 0 auto var(--space-lg);
         }
         
@@ -721,26 +483,13 @@
         }
         
         .author-name {
-            font-family: 'Comic Neue', 'Inter', sans-serif;
-            font-size: var(--text-2xl);
+            font-family: var(--font-display);
+            font-size: var(--text-xl);
             font-weight: 700;
-            background: linear-gradient(90deg, var(--secondary-pink), var(--primary-purple), var(--secondary-teal));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
+            color: var(--pk-navy);
             margin: 0;
             position: relative;
             display: inline-block;
-            animation: shimmerText 3s ease-in-out infinite;
-        }
-        
-        @keyframes shimmerText {
-            0%, 100% { 
-                background-position: 0% 50%;
-            }
-            50% { 
-                background-position: 100% 50%;
-            }
         }
         
         .author-pokeball {
@@ -751,8 +500,8 @@
             border: 2px solid #222224;
             margin: var(--space-md) auto 0;
             position: relative;
-            animation: bounce 2s ease-in-out infinite;
             cursor: pointer;
+            transition: transform var(--transition-base);
         }
         
         .author-pokeball::after {
@@ -768,11 +517,11 @@
             border-radius: 50%;
         }
         
-        .author-section:hover .author-name {
-            animation-duration: 1s;
+        /* Pokeball click easter egg — shared by header and author pokeballs */
+        .pokeball-clicked {
+            animation: spin 1s cubic-bezier(0.68, -0.55, 0.265, 1.55);
         }
         
-        /* Author pokeball spins on click, not hover */
         .author-pokeball.pokeball-clicked {
             animation: spin 1s cubic-bezier(0.68, -0.55, 0.265, 1.55);
         }
@@ -780,17 +529,6 @@
         @keyframes spin {
             0% { transform: rotate(0deg); }
             100% { transform: rotate(360deg); }
-        }
-        
-        /* Fun Easter Egg - Click the Pokeball! */
-        .pokeball-clicked {
-            animation: spin 1s cubic-bezier(0.68, -0.55, 0.265, 1.55);
-        }
-        
-        @keyframes spin {
-            0% { transform: rotate(0deg) scale(1); }
-            50% { transform: rotate(360deg) scale(1.2); }
-            100% { transform: rotate(720deg) scale(1); }
         }
         
         /* Responsive Design with Better Breakpoints */
@@ -820,7 +558,7 @@
             
             .prototype-section {
                 border-right: none;
-                border-bottom: 2px solid #e2e8f0;
+                border-bottom: 1px solid #e2e8f0;
                 min-height: 55vh;
                 max-height: 55vh;
                 padding: var(--space-md);
@@ -898,14 +636,196 @@
             h1 {
                 font-size: var(--text-xl);
             }
-            
-            .pokeball-icon {
-                width: 48px;
-                height: 48px;
+        }
+        
+        /* === NEW SHOWCASE SECTIONS === */
+        
+        .subtitle-section {
+            margin-bottom: var(--space-xl);
+        }
+        
+        .subtitle-text {
+            color: var(--text-secondary);
+            font-size: var(--text-base);
+            line-height: var(--leading-relaxed);
+            margin-bottom: var(--space-lg);
+        }
+        
+        .section-heading {
+            font-family: var(--font-display);
+            font-size: var(--text-lg);
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: var(--space-md);
+            display: flex;
+            align-items: center;
+            gap: var(--space-sm);
+            text-transform: uppercase;
+            letter-spacing: 0.03em;
+        }
+        
+        .challenge-section {
+            margin-bottom: var(--space-xl);
+        }
+        
+        .challenge-content {
+            background: rgba(155, 188, 15, 0.06);
+            border-radius: 12px;
+            padding: var(--space-lg);
+            border-left: 4px solid var(--gb-green);
+        }
+        
+        .challenge-content p {
+            color: var(--text-secondary);
+            font-size: var(--text-sm);
+            line-height: var(--leading-relaxed);
+        }
+        
+        .challenge-content p + p {
+            margin-top: var(--space-md);
+        }
+        
+        /* Inline design note — not a full boxed section */
+        .decisions-grid {
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-md);
+            margin-bottom: var(--space-xl);
+        }
+        
+        .decision-card {
+            background: var(--bg-light);
+            border-radius: 12px;
+            padding: var(--space-md) var(--space-lg);
+            border: 1px solid #e2e8f0;
+            transition: all var(--transition-base);
+        }
+        
+        .decision-card:hover {
+            background: var(--gb-green-muted);
+            border-color: var(--gb-green);
+            transform: translateX(4px);
+        }
+
+        .decision-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 12px;
+            font-size: 20px;
+        }
+        
+        .decision-title {
+            font-size: var(--text-sm);
+            font-weight: 700;
+            color: var(--gb-green-dark);
+            margin-bottom: var(--space-xs);
+            letter-spacing: 0.01em;
+        }
+        
+        .decision-text {
+            color: var(--text-secondary);
+            font-size: var(--text-sm);
+            line-height: var(--leading-relaxed);
+        }
+        
+        .process-section {
+            background: var(--bg-light);
+            border: 1px solid #e2e8f0;
+            border-radius: 12px;
+            padding: var(--space-lg);
+            margin: var(--space-xl) 0 var(--space-md) 0;
+        }
+        
+        .process-section .section-heading {
+            margin-bottom: var(--space-md);
+        }
+        
+        .process-intro {
+            color: var(--text-secondary);
+            font-size: var(--text-sm);
+            margin-bottom: var(--space-md);
+        }
+        
+        .process-iterations {
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-sm);
+            margin-bottom: var(--space-md);
+        }
+        
+        .iteration {
+            display: flex;
+            gap: var(--space-md);
+            align-items: flex-start;
+            font-size: var(--text-sm);
+            line-height: var(--leading-relaxed);
+            padding: var(--space-sm) var(--space-md);
+            background: rgba(0,0,0,0.02);
+            border-radius: 8px;
+        }
+        
+        .iteration-marker {
+            flex-shrink: 0;
+            font-size: 16px;
+            line-height: var(--leading-relaxed);
+            color: var(--text-tertiary);
+            font-weight: 600;
+        }
+        
+        .iteration-content {
+            flex: 1;
+        }
+        
+        .iteration-label {
+            color: var(--text-primary);
+            font-weight: 600;
+            display: block;
+            margin-bottom: 2px;
+        }
+        
+        .iteration-result {
+            color: var(--text-tertiary);
+        }
+        
+        .process-conclusion {
+            display: flex;
+            gap: var(--space-md);
+            align-items: flex-start;
+            font-size: var(--text-sm);
+            line-height: var(--leading-relaxed);
+            padding: var(--space-sm) var(--space-md);
+            background: var(--gb-green-muted);
+            border-radius: 8px;
+            border: 1px solid rgba(155, 188, 15, 0.25);
+            color: var(--text-secondary);
+        }
+
+        .process-conclusion .iteration-marker {
+            color: var(--gb-green-dark);
+        }
+        
+        .process-footnote {
+            font-size: var(--text-xs);
+            color: var(--text-tertiary);
+            font-style: italic;
+            margin-top: var(--space-md);
+            padding-top: var(--space-sm);
+            border-top: 1px solid rgba(0,0,0,0.05);
+            line-height: var(--leading-relaxed);
+        }
+        
+        /* Responsive adjustments for new sections */
+        @media (max-width: 640px) {
+            .challenge-content {
+                padding: var(--space-md);
             }
             
-            .feature-list li {
-                padding: var(--space-sm);
+            .decision-card {
+                padding: var(--space-md);
             }
         }
         
@@ -925,8 +845,8 @@
                 border: 2px solid var(--text-primary);
             }
             
-            .tldr-box, .note-box, .tools-section {
-                border-width: 3px;
+            .challenge-content, .decision-card, .process-section {
+                border-width: 2px;
             }
         }
         
@@ -963,51 +883,53 @@
             <div class="prototype-wrapper">
                 <iframe 
                     src="prototype/" 
-                    title="Pokemon Trainer Recruitment Interactive Prototype"
-                    aria-label="Interactive Game Boy prototype demonstrating the trainer recruitment feature"
+                    title="Pokémon Trainer Recruitment Interactive Prototype"
+                    aria-label="Interactive Game Boy prototype demonstrating the Trainer Recruitment feature"
                     scrolling="no">
                 </iframe>
             </div>
         </aside>
         
-        <main class="info-section" id="main-content" role="main">
-            <!-- Mobile-only fullscreen link -->
-            <p class="desktop-notice">
-                <a href="prototype/" rel="noopener">
-                    View Fullscreen
+        <!-- Mobile-only: scaled preview with tap overlay (Crunchyroll pattern) -->
+        <div class="mobile-proto-preview">
+            <div class="mobile-device-frame">
+                <iframe 
+                    src="prototype/" 
+                    title="Pokémon Trainer Recruitment Preview"
+                    scrolling="no"
+                    aria-hidden="true">
+                </iframe>
+                <a href="prototype/" class="mobile-tap-overlay" id="mobile-proto-link" rel="noopener">
+                    <span class="mobile-tap-btn">▶ Open Prototype</span>
+                    <span class="mobile-tap-label">Tap to open fullscreen</span>
                 </a>
-            </p>
+            </div>
+        </div>
+        
+        <main class="info-section" id="main-content" role="main">
             
-            <!-- Header with two lines -->
+            <!-- Header -->
             <div class="header-stacked">
                 <div class="title-line-1">
-                    <div class="pokeball-icon" 
+                    <div class="label-pokeball" 
                          role="img" 
-                         aria-label="Pokeball icon" 
+                         aria-label="Pokéball"
                          tabindex="0"
                          onclick="this.classList.add('pokeball-clicked'); setTimeout(() => this.classList.remove('pokeball-clicked'), 1000)">
                     </div>
-                    <span>Pokemon Blue Gacha</span>
-                    <div class="pokeball-icon" 
-                         role="img" 
-                         aria-label="Pokeball icon" 
-                         tabindex="0"
-                         onclick="this.classList.add('pokeball-clicked'); setTimeout(() => this.classList.remove('pokeball-clicked'), 1000)">
-                    </div>
+                    <span>Pokémon Blue · Gacha Design</span>
                 </div>
-                <h1 class="tagline">Gotta Recruit 'Em All!</h1>
+                <h1 class="tagline">Trainer Recruitment</h1>
+                <p class="tagline-sub">Gotta Recruit 'Em All!</p>
             </div>
             
-            <section class="tldr-box" aria-labelledby="tldr-heading">
-                <h2 class="tldr-title" id="tldr-heading">
-                    💡 TL;DR
-                </h2>
-                <p class="tldr-content">
-                    Trainer Recruitment is a new gacha feature in Pokemon Blue that lets players collect more playable characters, adding depth and replayability to the classic game.
+            <section class="subtitle-section" aria-label="Project overview">
+                <p class="subtitle-text">
+                    Pokémon Blue's endgame has a shelf life problem — beat the Elite Four and there's nothing left to chase. Trainer Recruitment adds a gacha collection system that extends play by 25–50 hours without breaking the premium model that makes the game work.
                 </p>
                 <div class="tldr-button-container">
                     <p class="tldr-button-helper">
-                        For details on Gacha Mechanics, Currency & Progression:
+                        Economy balancing, gacha mechanics, rarity tuning & prototype testing methodology:
                     </p>
                     <a href="https://jamieychu.notion.site/pokemon-blue-gacha" 
                        class="tldr-doc-button" 
@@ -1018,58 +940,92 @@
                 </div>
             </section>
             
-            <section aria-labelledby="features-heading">
-                <h2 class="visually-hidden" id="features-heading">Key Features</h2>
-                <ul class="feature-list" role="list">
-                    <li role="listitem">
-                        <span class="feature-icon" aria-hidden="true">⭐</span>
-                        <p class="feature-text">
-                            <strong>Earn & Spend System:</strong> Players earn Recruit Pts through normal gameplay and spend them to add Trainers to their Registry, creating a satisfying progression loop.
-                        </p>
-                    </li>
-                    <li role="listitem">
-                        <span class="feature-icon" aria-hidden="true">💎</span>
-                        <p class="feature-text">
-                            <strong>Fair Premium Model:</strong> The system respects Pokemon Blue's premium game model with transparent mechanics and guaranteed completion paths.
-                        </p>
-                    </li>
-                    <li role="listitem">
-                        <span class="feature-icon" aria-hidden="true">🎯</span>
-                        <p class="feature-text">
-                            <strong>Enhanced Endgame:</strong> Experiential goal is to bolster collection hobby and role playing - extending player joy and engagement in the endgame.
-                        </p>
-                    </li>
-                </ul>
-            </section>
-            
-            <section class="note-box" role="note" aria-labelledby="note-heading">
-                <h3 class="note-title" id="note-heading">
-                    ⚠️ Design Note
-                </h3>
-                <p class="note-text">
-                    This prototype intended to follow original Pokemon Blue design systems and Game Boy console conventions. There were still liberties taken with elements such as character sprite fidelity, text character count, and console screen size.
-                </p>
-            </section>
-            
-            <section class="tools-section" aria-labelledby="tools-heading">
-                <h3 class="tools-title" id="tools-heading">
-                    🛠️ Prototype Tools
-                </h3>
-                <div class="tools-list" role="list">
-                    <a href="https://claude.ai" class="tool-badge" role="listitem" target="_blank" rel="noopener noreferrer">🤖 ClaudeAI</a>
-                    <a href="https://www.midjourney.com" class="tool-badge" role="listitem" target="_blank" rel="noopener noreferrer">🎨 Midjourney</a>
-                    <a href="https://www.notion.so" class="tool-badge" role="listitem" target="_blank" rel="noopener noreferrer">📝 Notion</a>
+            <!-- PRODUCT CHALLENGE -->
+            <section class="challenge-section" aria-labelledby="challenge-heading">
+                <h2 class="section-heading" id="challenge-heading">
+                    Product Challenge
+                </h2>
+                <div class="challenge-content">
+                    <p>Gacha systems usually depend on real-money spending and FOMO mechanics — limited banners, premium currency, daily login pressure. None of that works here. Pokémon Blue is a finished box product with no live service layer and no monetization infrastructure.</p>
+                    <p>So I built the whole system on a single earned currency, tied to things players are already doing — beating trainers, catching Pokémon, exploring routes. The pull has to feel exciting on its own — no pressure to spend, just good design.</p>
                 </div>
             </section>
             
-            <section class="tip-box" role="complementary" aria-labelledby="tip-heading">
-                <h3 class="tip-title" id="tip-heading">
-                    🎮 Pro Tip
+            <!-- KEY DESIGN DECISIONS -->
+            <section aria-labelledby="decisions-heading">
+                <h2 class="section-heading" id="decisions-heading">
+                    Key Design Decisions
+                </h2>
+                <div class="decisions-grid">
+                    <div class="decision-card">
+                        <div class="decision-icon" style="background:rgba(155,188,15,0.15);">🪙</div>
+                        <h3 class="decision-title">Earn, Never Buy</h3>
+                        <p class="decision-text">No premium currency, no real-money path. Players earn Recruit Pts entirely through gameplay — gym badges, trainer battles, Pokédex milestones — so the system rewards exploration, not spending.</p>
+                    </div>
+                    <div class="decision-card">
+                        <div class="decision-icon" style="background:rgba(30,58,95,0.12);">🛡️</div>
+                        <h3 class="decision-title">Transparent Safety Net, Hidden Magic</h3>
+                        <p class="decision-text">Hard pity (guaranteed Gym Leader at 35 pulls) and rare pity (at 10 pulls) are always visible — players can see the safety net. Soft pity (gradually increasing rates from pull 20) stays hidden, so the thrill of "getting lucky" is real even when the math is helping.</p>
+                    </div>
+                    <div class="decision-card">
+                        <div class="decision-icon" style="background:rgba(204,51,51,0.12);">🎨</div>
+                        <h3 class="decision-title">Cosmetic Only, Zero Power Creep</h3>
+                        <p class="decision-text">Trainers are visual reskins — they change who you play as, not how the game plays. The collection stays worth chasing without ever touching game balance.</p>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- DESIGN PROCESS -->
+            <section class="process-section" aria-labelledby="process-heading">
+                <h3 class="section-heading" id="process-heading">
+                    Design Process
                 </h3>
-                <p class="tip-content">
-                    Use GameBoy buttons to navigate through the prototype. Press <strong>SELECT</strong> to restart at any time! 
-                    Try clicking the Pokeball icon above for a fun surprise! 🎉
-                </p>
+                <p class="process-intro">Three concepts were explored before landing on Trainer Recruitment:</p>
+                <div class="process-iterations">
+                    <div class="iteration">
+                        <span class="iteration-marker">✕</span>
+                        <div class="iteration-content">
+                            <span class="iteration-label">Character Customization</span>
+                            <span class="iteration-result">Sprite fidelity too low to read cosmetic differences on Game Boy hardware.</span>
+                        </div>
+                    </div>
+                    <div class="iteration">
+                        <span class="iteration-marker">✕</span>
+                        <div class="iteration-content">
+                            <span class="iteration-label">Pokémon Variants</span>
+                            <span class="iteration-result">Risked breaking the core catch-and-battle loop that drives the whole game.</span>
+                        </div>
+                    </div>
+                    <div class="iteration">
+                        <span class="iteration-marker">✕</span>
+                        <div class="iteration-content">
+                            <span class="iteration-label">Limited-Time Banners</span>
+                            <span class="iteration-result">Would require live service infrastructure and paid currency — converting a box product into something it isn't.</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="process-conclusion">
+                    <span class="iteration-marker">✓</span>
+                    <div class="iteration-content">
+                        <span class="iteration-label">Trainer Recruitment</span>
+                        <span class="iteration-result">Works within existing Game Boy sprite constraints and taps the game's most underused player motivation: being someone other than Red.</span>
+                    </div>
+                </div>
+                <p class="process-footnote">Prototype follows original Pokémon Blue visual systems and Game Boy conventions. Liberties taken with sprite fidelity, text character count, and screen dimensions.</p>
+            </section>
+            
+            <div class="content-divider"></div>
+
+            <!-- BUILT WITH -->
+            <section class="tools-section" aria-labelledby="tools-heading">
+                <h3 class="tools-title" id="tools-heading">
+                    Built With
+                </h3>
+                <div class="tools-list" role="list">
+                    <a href="https://claude.ai" class="tool-badge" role="listitem" target="_blank" rel="noopener noreferrer">🤖 Claude AI</a>
+                    <a href="https://www.midjourney.com" class="tool-badge" role="listitem" target="_blank" rel="noopener noreferrer">🎨 Midjourney</a>
+                    <a href="https://www.notion.so" class="tool-badge" role="listitem" target="_blank" rel="noopener noreferrer">📝 Notion</a>
+                </div>
             </section>
             
             <!-- Author Credit -->
@@ -1114,7 +1070,7 @@
             <iframe 
                 id="modal-iframe"
                 src=""
-                title="Pokemon Trainer Recruitment Fullscreen Prototype"
+                title="Pokémon Trainer Recruitment Fullscreen Prototype"
                 scrolling="no">
             </iframe>
         </div>
@@ -1191,33 +1147,12 @@
                 border: none;
                 border-radius: 12px;
                 box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
-                background: linear-gradient(180deg, #f8fafc 0%, #f1f5f9 100%);
+                background: var(--bg-light);
             }
             
-            /* Mobile: Improve fullscreen button */
-            .desktop-notice a {
-                padding: 8px 16px !important; /* Original padding for proper spacing */
-                font-size: 0.9rem !important; /* Slightly larger than base but fits well */
-                display: inline-flex !important; /* Use flexbox for better alignment */
-                align-items: center !important; /* Vertically center content */
-                gap: 6px !important; /* Good spacing between text and icon */
-                line-height: 1.2 !important; /* Tight line height */
-            }
-            
-            .desktop-notice a::after {
-                content: '⤢';
-                font-size: 1.3rem !important; /* Noticeably larger icon that fits proportionally */
-                display: inline-flex;
-                align-items: center;
-                line-height: 0.9; /* Tighter line height for better cross-platform alignment */
-                transform: translateY(-2px); /* Slightly more upward adjustment for Android compatibility */
-            }
-            
-            /* Mobile: Fix pokeball aspect ratio in header */
-            .pokeball-icon {
-                width: 56px !important;
-                height: 56px !important;
-                min-width: 56px;
+            /* Mobile: Hide desktop prototype, show mobile preview instead */
+            .prototype-section {
+                display: none !important;
             }
             
             /* Mobile: Natural scrolling - remove fixed positioning */
@@ -1239,20 +1174,20 @@
             }
         }
         
-        /* Desktop: Hide modal completely */
+        /* Desktop: Hide modal and mobile preview */
         @media (min-width: 769px) {
             .prototype-modal {
                 display: none !important;
             }
             
-            .desktop-notice {
+            .mobile-proto-preview {
                 display: none !important;
             }
         }
     </style>
     
     <script>
-        // MOBILE-ONLY: Modal functionality (production version - no debug code)
+        // MOBILE-ONLY: Modal functionality
         document.addEventListener('DOMContentLoaded', function() {
             const isMobile = window.innerWidth <= 768;
             
@@ -1263,20 +1198,18 @@
             const modal = document.getElementById('prototype-modal');
             const modalIframe = document.getElementById('modal-iframe');
             const closeBtn = document.querySelector('.modal-close');
-            const fullscreenLink = document.querySelector('.desktop-notice a');
+            const protoLink = document.getElementById('mobile-proto-link');
             
-            if (!modal || !modalIframe || !closeBtn || !fullscreenLink) {
+            if (!modal || !modalIframe || !closeBtn || !protoLink) {
                 return;
             }
             
-            // Open modal on fullscreen link click
-            fullscreenLink.addEventListener('click', function(e) {
+            // Open modal on preview tap
+            protoLink.addEventListener('click', function(e) {
                 e.preventDefault();
                 
-                // Set iframe source with absolute path
                 modalIframe.src = window.location.origin + window.location.pathname.replace('index.html', '') + 'prototype/';
                 
-                // Show modal
                 modal.style.display = 'block';
                 modal.style.position = 'fixed';
                 modal.style.top = '0';
@@ -1286,16 +1219,11 @@
                 modal.style.zIndex = '10000';
                 modal.classList.add('active');
                 
-                // Prevent background scrolling
                 document.body.style.overflow = 'hidden';
             });
             
-            // Close modal function
             function closeModal() {
-                // Remove active class
                 modal.classList.remove('active');
-                
-                // Reset inline styles
                 modal.style.display = '';
                 modal.style.position = '';
                 modal.style.top = '';
@@ -1303,23 +1231,13 @@
                 modal.style.width = '';
                 modal.style.height = '';
                 modal.style.zIndex = '';
-                
-                // Restore scrolling
                 document.body.style.overflow = '';
                 
-                // Clear iframe src
-                setTimeout(() => {
-                    modalIframe.src = '';
-                }, 300);
+                setTimeout(() => { modalIframe.src = ''; }, 300);
             }
             
-            // Close on button click
             closeBtn.addEventListener('click', closeModal);
-            
-            // Close on overlay click
             document.querySelector('.modal-overlay').addEventListener('click', closeModal);
-            
-            // Close on escape key
             document.addEventListener('keydown', function(e) {
                 if (e.key === 'Escape' && modal.classList.contains('active')) {
                     closeModal();
